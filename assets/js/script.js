@@ -7,7 +7,8 @@ let specialCharacters = "!@#$%^&*_-+=";
 let inclUpper = (pwcharacters += upperLetters);
 let inclLower = (pwcharacters += lowerLetters);
 let inclNumbers = (pwcharacters += numbers);
-let inclSpecials = (pw += specialCharacters);
+let inclSpecials = (pwcharacters += specialCharacters);
+
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
@@ -32,15 +33,29 @@ function generatePassword() {
     return generatePassword();
   };
   
-  let characterTypesConfirm = window.confirm(`Please choose what character types you'd like to include.`);
+  let characterTypesConfirm = window.confirm.toString(`Please choose what character types you'd like to include.`);
   if (!characterTypesConfirm) {
     window.alert(`You must choose at least one character type to include.`)
     return generatePassword();
   } 
   let numberPrompt = window.confirm(`Would you like your password to include numbers?`);
+  if (!numberPrompt) {
+    pwcharacters = pwcharacters.split(numbers);
+  }
   let lowerCaseConfirm = window.confirm(`Would you like to include lower case letters?`);
+  if (!lowerCaseConfirm) {
+    pwcharacters = pwcharacters.split(lowerLetters);
+  }
   let upperCaseConfirm = window.confirm(`Would you like to include upper case letters?`);
+  if (!upperCaseConfirm) {
+    pwcharacters = pwcharacters.split(upperLetters);
+  }
   let specialCharacterConfirm = window.confirm(`Would you like to include special characters?`);
+  if (!specialCharacterConfirm) {
+    // pwcharacters = pwcharacters.split(specialCharacters);
+
+    console.log(typeof pwcharacters);
+  }
   if (!numberPrompt && !lowerCaseConfirm && !upperCaseConfirm && !specialCharacterConfirm) {
     window.alert(`You must choose at least one character type!`);
     return generatePassword();
@@ -49,11 +64,13 @@ function generatePassword() {
   // password length needs to equal the characterLengthPrompt
   for (let len = 0; len < characterLengthPrompt; len++) {
     pw = Math.floor(Math.random() * 10);
-    // console.log(pw);
     password = pwcharacters[pw];
-    console.log(password);
+    // console.log(specialCharacterConfirm);
+    // console.log(pwcharacters);
+
   }
-  }
+}
+noNum = console.log(pwcharacters.split(numbers));
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
