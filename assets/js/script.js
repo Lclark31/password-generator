@@ -7,7 +7,7 @@ let specialCharacters = "!@#$%^&*_-+=";
 let inclUpper = (pwcharacters += upperLetters);
 let inclLower = (pwcharacters += lowerLetters);
 let inclNumbers = (pwcharacters += numbers);
-let inclSpecials = (pw += specialCharacters);
+let inclSpecials = (pwcharacters += specialCharacters);
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
@@ -48,9 +48,9 @@ function generatePassword() {
   
   // password length needs to equal the characterLengthPrompt
   for (let len = 0; len < characterLengthPrompt; len++) {
-    pw = Math.floor(Math.random() * 10);
+    pw = Math.floor(Math.random() * pwcharacters.length);
     // console.log(pw);
-    password = pwcharacters[pw];
+    password += pwcharacters.substring(pw,pw+1);
     console.log(password);
   }
   }
