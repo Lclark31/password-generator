@@ -1,13 +1,10 @@
 // Assignment code here
-let pwcharacters = ``;
-let lowerLetters = "abcdefghijklmnopqrstuvwxyz";
-let upperLetters = `ABCDEFGHIJKLMNOPQRSTUVWXYZ`
-let numbers = "0123456789";
-let specialCharacters = "!@#$%^&*_-+=";
-let inclUpper = (pwcharacters += upperLetters);
-let inclLower = (pwcharacters += lowerLetters);
-let inclNumbers = (pwcharacters += numbers);
-let inclSpecials = (pwcharacters += specialCharacters);
+let pwcharacters = `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*_-+=`;
+let lowerLetters = "";
+let upperLetters = ``
+let numbers = "";
+let specialCharacters = "";
+
 
 
 // Get references to the #generate element
@@ -40,7 +37,7 @@ function generatePassword() {
   } 
   let numberPrompt = window.confirm(`Would you like your password to include numbers?`);
   if (!numberPrompt) {
-    pwcharacters = pwcharacters.split(numbers);
+    pwcharacters = pwcharacters.split(`9`).pop();
   }
   let lowerCaseConfirm = window.confirm(`Would you like to include lower case letters?`);
   if (!lowerCaseConfirm) {
