@@ -1,13 +1,6 @@
 // Assignment code here
-let pwcharacters = ``;
-let lowerLetters = "abcdefghijklmnopqrstuvwxyz";
-let upperLetters = `ABCDEFGHIJKLMNOPQRSTUVWXYZ`
-let numbers = "0123456789";
-let specialCharacters = "!@#$%^&*_-+=";
-let inclUpper = (pwcharacters += upperLetters);
-let inclLower = (pwcharacters += lowerLetters);
-let inclNumbers = (pwcharacters += numbers);
-let inclSpecials = (pwcharacters += specialCharacters);
+var chars = `0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*_-+=`
+var chosenSet = ``
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
@@ -22,15 +15,16 @@ function writePassword() {
 }
 
 function generatePassword() {
+  console.log(chosenSet)
   let characterLengthPrompt = parseInt(window.prompt(`How many characters would you like your password to be (min: 8 max: 128)?`));
   if (!characterLengthPrompt || typeof characterLengthPrompt === `string`) {
     window.alert(`Please enter a number.`);
     return generatePassword();
-  };
+  }
   if (characterLengthPrompt < 8 || characterLengthPrompt > 128) {
     window.alert(`password must be between 8 and 128 characters!`);
     return generatePassword();
-  };
+  }
   
   let characterTypesConfirm = window.confirm(`Please choose what character types you'd like to include.`);
   if (!characterTypesConfirm) {
@@ -38,22 +32,37 @@ function generatePassword() {
     return generatePassword();
   } 
   let numberPrompt = window.confirm(`Would you like your password to include numbers?`);
+  if (numberPrompt) {
+    chosenSet += chars.slice(0, 9);
+    console.log(chosenSet);
+  }
   let lowerCaseConfirm = window.confirm(`Would you like to include lower case letters?`);
+  if (lowerCaseConfirm) {
+    chosenSet += chars.slice(36, 61);
+  }
   let upperCaseConfirm = window.confirm(`Would you like to include upper case letters?`);
+  if (upperCaseConfirm) {
+    chosenSet += chars.slice(10, 35);
+  }
   let specialCharacterConfirm = window.confirm(`Would you like to include special characters?`);
+  if (specialCharacterConfirm) {
+    chosenSet += chars.slice(62, 73);
+  }
   if (!numberPrompt && !lowerCaseConfirm && !upperCaseConfirm && !specialCharacterConfirm) {
     window.alert(`You must choose at least one character type!`);
     return generatePassword();
-  };
-  
-  // password length needs to equal the characterLengthPrompt
-  for (let len = 0; len < characterLengthPrompt; len++) {
-    pw = Math.floor(Math.random() * pwcharacters.length);
-    // console.log(pw);
-    password += pwcharacters.substring(pw,pw+1);
-    console.log(password);
   }
+  for (let i=0; i < characterLengthPrompt; i++) {
+    var randomNum = Math.floor(Math.random() * chars.length);
+    console.log(randomNum);
   }
 
+};
+
 // Add event listener to generate button
+// for (let len = 0; len < characterLengthPrompt; len++) {
+// pw = Math.floor(Math.random() * pwcharacters.length);
+// password += pwcharacters.substring(pw,pw+1);
+//     console.log(password); }
+    
 generateBtn.addEventListener("click", writePassword);
