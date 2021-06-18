@@ -53,7 +53,9 @@ function generatePassword() {
     return generatePassword();
   }
   for (var i=0; i < characterLengthPrompt; i++) {
-    var randomNum = Math.floor(Math.random() * chars.length);
+    var randomNum = Math.floor(Math.random() * chosenSet.length);
+    // console.log(randomNum);
+    // console.log(chosenSet);
     pw += chosenSet.substring(randomNum, randomNum+1);
   }
   return pw;
