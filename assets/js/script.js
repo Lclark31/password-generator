@@ -1,5 +1,9 @@
 // Assignment code here
 var chars = `0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*_-+=`
+let reLowerLetters = /[a-z]/;
+let reUpperLetters = /[A-Z]/;
+let reSpecials = /\W/;
+let reNumbers = /\d/;
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
@@ -8,7 +12,7 @@ var generateBtn = document.querySelector("#generate");
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-  
+
   passwordText.value = password;
   console.log(password.length);
 }
@@ -26,12 +30,11 @@ function generatePassword() {
     window.alert(`password must be between 8 and 128 characters!`);
     return generatePassword();
   }
-  
+
   let characterTypesConfirm = window.confirm(`Please choose what character types you'd like to include.`);
   if (!characterTypesConfirm) {
-    window.alert(`You must choose at least one character type to include.`)
-    return generatePassword();
-  } 
+    window.alert(`You must choose at least one character type to include.`);
+  }
   let numberPrompt = window.confirm(`Would you like your password to include numbers?`);
   if (numberPrompt) {
     chosenSet += chars.slice(0, 10);
@@ -52,14 +55,24 @@ function generatePassword() {
     window.alert(`You must choose at least one character type!`);
     return generatePassword();
   }
-  for (var i=0; i < characterLengthPrompt; i++) {
-    var randomNum = Math.floor(Math.random() * chosenSet.length);
-    // console.log(randomNum);
-    // console.log(chosenSet);
-    pw += chosenSet.substring(randomNum, randomNum+1);
+
+  let generator = function () {
+    pw = ``
+    for (var i = 0; i < characterLengthPrompt; i++) {
+      var randomNum = Math.floor(Math.random() * chosenSet.length);
+      pw += chosenSet.substring(randomNum, randomNum + 1);
+    }
+    if (numberPrompt && lowerCaseConfirm && upperCaseConfirm && specialCharacterConfirm) {
+      if (!reSpecials.test(pw) || !reLowerLetters.test(pw) || !reNumbers.test(pw) || !reUpperLetters.test(pw)) {
+        generator();
+      }
+    }
   }
+
+  generator();
+
   return pw;
-  
+
 };
 
 // Add event listener to generate button
