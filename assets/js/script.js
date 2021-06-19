@@ -35,8 +35,8 @@ function generatePassword() {
   if (!characterTypesConfirm) {
     window.alert(`You must choose at least one character type to include.`);
   }
-  let numberPrompt = window.confirm(`Would you like your password to include numbers?`);
-  if (numberPrompt) {
+  let numberConfirm = window.confirm(`Would you like your password to include numbers?`);
+  if (numberConfirm) {
     chosenSet += chars.slice(0, 10);
   }
   let lowerCaseConfirm = window.confirm(`Would you like to include lower case letters?`);
@@ -51,7 +51,7 @@ function generatePassword() {
   if (specialCharacterConfirm) {
     chosenSet += chars.slice(62, 74);
   }
-  if (!numberPrompt && !lowerCaseConfirm && !upperCaseConfirm && !specialCharacterConfirm) {
+  if (!numberConfirm && !lowerCaseConfirm && !upperCaseConfirm && !specialCharacterConfirm) {
     window.alert(`You must choose at least one character type!`);
     return generatePassword();
   }
@@ -62,7 +62,7 @@ function generatePassword() {
       var randomNum = Math.floor(Math.random() * chosenSet.length);
       pw += chosenSet.substring(randomNum, randomNum + 1);
     }
-    if (numberPrompt && lowerCaseConfirm && upperCaseConfirm && specialCharacterConfirm) {
+    if (numberConfirm && lowerCaseConfirm && upperCaseConfirm && specialCharacterConfirm) {
       if (!reSpecials.test(pw) || !reLowerLetters.test(pw) || !reNumbers.test(pw) || !reUpperLetters.test(pw)) {
         generator();
       }
